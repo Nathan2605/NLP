@@ -1,89 +1,99 @@
-# Data Science Project Boilerplate
+# 🚨 Spam URL Detection System
 
-This boilerplate is designed to kickstart data science projects by providing a basic setup for database connections, data processing, and machine learning model development. It includes a structured folder organization for your datasets and a set of pre-defined Python packages necessary for most data science tasks.
+## Project Overview
+This project focuses on detecting spam URLs using Natural Language Processing (NLP) techniques and machine learning. The goal is to classify URLs as either spam or not spam based on their textual content. The model leverages the support vector machine (SVM) algorithm to build a classifier trained on a dataset of URLs labeled as spam or not.
 
-## Structure
+---
+
+## 📂 Project Structure
 
 The project is organized as follows:
 
-- `app.py` - The main Python script that you run for your project.
-- `explore.py` - A notebook to explore data, play around, visualize, clean, etc. Ideally the notebook code should be migrated to the app.py when moving to production.
-- `utils.py` - This file contains utility code for operations like database connections.
-- `requirements.txt` - This file contains the list of necessary python packages.
-- `models/` - This directory should contain your SQLAlchemy model classes.
-- `data/` - This directory contains the following subdirectories:
-  - `interin/` - For intermediate data that has been transformed.
-  - `processed/` - For the final data to be used for modeling.
-  - `raw/` - For raw data without any processing.
- 
-    
-## Setup
+- spam_detection.ipynb - The main Python script.
+- app.py - Python script.
+- explore.py - A notebook to explore data, play around, visualize, clean, etc. 
+- utils.py - This file contains utility code for operations like database connections.
+- requirements.txt - This file contains the list of necessary python packages.
+- models/ - This directory should contain your SQLAlchemy model classes.
+- data/ - This directory contains the following subdirectories:
+  - interin/ - For intermediate data that has been transformed.
+  - processed/ - For the final data to be used for modeling.
+  - raw/ - For raw data without any processing.
 
-**Prerequisites**
+*Note*: This project structure is a general guideline and may not be strictly followed in every case. The actual structure might vary depending on the project needs, team preferences, or specific workflows.
 
-Make sure you have Python 3.11+ installed on your. You will also need pip for installing the Python packages.
+---
 
-**Installation**
+## Dataset
+The dataset consists of URLs labeled as spam (1) or not spam (0). It includes:
+- **URL**: The URL string.
+- **is_spam**: Label indicating whether the URL is spam or not.
 
-Clone the project repository to your local machine.
+The data contains noise and irrelevant information, which is preprocessed for better accuracy in the model.
 
-Navigate to the project directory and install the required Python packages:
+---
 
-```bash
-pip install -r requirements.txt
-```
+## Objective
+The primary goal of the project is to build a model that can accurately classify URLs as spam or not based on their text content.
 
-**Create a database (if needed)**
+---
 
-Create a new database within the Postgres engine by customizing and executing the following command: `$ createdb -h localhost -U <username> <db_name>`
-Connect to the Postgres engine to use your database, manipulate tables and data: `$ psql -h localhost -U <username> <db_name>`
-NOTE: Remember to check the ./.env file information to get the username and db_name.
+## 📈 Key Features
 
-Once you are inside PSQL you will be able to create tables, make queries, insert, update or delete data and much more!
+### Data Preprocessing
+- Cleaned and transformed the text of URLs by removing unwanted characters and irrelevant spaces.
+- Lemmatized and removed stopwords to improve model performance.
 
-**Environment Variables**
+### Feature Extraction
+- Used TF-IDF vectorization to convert the text data into numerical features for the machine learning model.
 
-Create a .env file in the project root directory to store your environment variables, such as your database connection string:
+### Model Building
+- Built and evaluated a Support Vector Machine (SVM) model with a linear kernel to classify URLs.
+- Optimized the SVM model with a grid search over multiple hyperparameters.
 
-```makefile
-DATABASE_URL="your_database_connection_url_here"
-```
+### Wordcloud Visualization
+- Generated a word cloud to visualize the most frequent terms in the URLs.
 
-## Running the Application
+---
 
-To run the application, execute the app.py script from the root of the project directory:
+## 🛠️ Technologies Used
 
-```bash
-python app.py
-```
+| **Category**         | **Libraries/Tools**            |
+|----------------------|--------------------------------|
+| Programming Language | Python                         |
+| Data Manipulation    | Pandas, NumPy                  |
+| Text Preprocessing   | regex, NLTK                    |
+| Visualization        | Matplotlib, WordCloud          |
+| Machine Learning     | Scikit-learn                   |
 
-## Adding Models
+---
 
-To add SQLAlchemy model classes, create new Python script files inside the models/ directory. These classes should be defined according to your database schema.
+## 📊 Performance Summary
 
-Example model definition (`models/example_model.py`):
+| **Model**  | **Precision** | **Recall** | **F1-Score** | **Accuracy** |
+|------------|---------------|------------|--------------|--------------|
+| SVM        | 0.83          | 0.51       | 0.63         | 0.95         |
 
-```py
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+**Note**: The SVM model, after hyperparameter optimization, achieves a high accuracy but has room for improvement in recall for spam classification.
 
-Base = declarative_base()
+---
 
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
+## 🚀 Getting Started
 
-```
+### Requirements
+- **Python 3.8+**
+- Install the required libraries:
+  ```bash
+  pip install pandas numpy matplotlib scikit-learn regex nltk wordcloud
+How to Run:  
+Clone the repository  
+Follow the step-by-step analysis, preprocessing, and model evaluation process.
 
-## Working with Data
-
-You can place your raw datasets in the data/raw directory, intermediate datasets in data/interim, and the processed datasets ready for analysis in data/processed.
-
-To process data, you can modify the app.py script to include your data processing steps, utilizing pandas for data manipulation and analysis.
-
-## Contributors
-
-This template was built as part of the 4Geeks Academy [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about [4Geeks Academy's BootCamp programs](https://4geeksacademy.com/us/programs) here.
-
-Other templates and resources like this can be found on the school GitHub page.
+## 🌟 Highlights
+Real-world Application: This system helps classify potentially harmful URLs, improving security and reducing spam.    
+Reproducibility: Each step, from data preprocessing to model optimization, is well-documented for ease of use.    
+Open Source Contribution: The code is available for further improvement and adaptation to other NLP classification tasks.    
+## 📬 Contact
+Author: Nathan Harroch  
+LinkedIn: [linkedin.com/in/username ](https://www.linkedin.com/in/nathan-harroch-b11590196/)   
+Email: nathan.harroch06@gmail.com    
